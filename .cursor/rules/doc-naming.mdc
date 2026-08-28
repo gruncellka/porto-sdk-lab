@@ -1,0 +1,28 @@
+# Markdown file naming (Porto SDK Lab)
+
+## Rule
+
+- **Always lowercase** file names.
+- **One word:** `dependency.md`, `config.md`, `debugging.md`, `resources.md`.
+- **Group with a subfolder** when topics share a prefix — do not use multi-word filenames (`docs/labs/resources.md`, not `local-resources.md`).
+- **No `SCREAMING_SNAKE_CASE`** or `PascalCase` in doc file names.
+
+## Exceptions (repo conventions)
+
+Keep standard GitHub root filenames as-is: `README.md`, `CONTRIBUTING.md`, `CHANGELOG.md`, `SECURITY.md`, `LICENSE`.
+
+Architectural decisions live in one file: `docs/adr.md` (sections, not numbered files).
+
+## Examples
+
+| Avoid | Prefer |
+|-------|--------|
+| `PORTO_STACK_ARCHITECTURE.md` | `docs/stack.md` |
+| `PUBLIC_API.md` | `docs/sdks/public.md` |
+| `SDK_ARCHITECTURE.md` | `docs/sdks/architecture.md` |
+| `FEATURE_ANALYSIS.md` | removed — catalog mapping lives in porto-data |
+| `DEBUGGING.md` | `labs/debugging.md` |
+| `LOCAL_RESOURCE_PACKAGES_DEVELOPMENT.md` | `docs/labs/resources.md` |
+| `known-gaps.md` | `docs/sdks/gaps.md` |
+
+When adding or renaming docs, update all cross-links in the same change.

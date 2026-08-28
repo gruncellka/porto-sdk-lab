@@ -1,0 +1,27 @@
+# Pre-commit configuration for Python Lab
+#
+# Run: pre-commit run --config .pre-commit-config-py-lab.yaml --all-files
+
+repos:
+    - repo: local
+      hooks:
+          - id: format
+            name: format
+            entry: bash -c '. venv/bin/activate 2>/dev/null || true && ruff format --line-length=100 "$@"' --
+            language: system
+            files: ^labs/python/.*\.py$
+            pass_filenames: true
+
+          - id: lint
+            name: lint
+            entry: bash -c '. venv/bin/activate 2>/dev/null || true && ruff check --fix "$@"' --
+            language: system
+            files: ^labs/python/.*\.py$
+            pass_filenames: true
+
+          - id: types
+            name: types
+            entry: bash -c '[ $# -eq 0 ] && exit 0; . venv/bin/activate 2>/dev/null || true && mypy --config-file=labs/python/mypy.ini --no-sqlite-cache "$@"' --
+            language: system
+            files: ^labs/python/.*\.py$
+            pass_filenames: true

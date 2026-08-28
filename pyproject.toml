@@ -1,0 +1,100 @@
+[project]
+name = "porto-sdk-lab"
+version = "0.0.0"
+description = "Orchestration workspace for Porto SDK ecosystem development and cross-repo verification"
+license = {text = "Apache-2.0"}
+authors = [{name = "Oleksandr Tsyba (gruncellka)"}]
+requires-python = ">=3.13"
+
+[project.optional-dependencies]
+dev = [
+    "pre-commit>=3.5.0",
+    "ruff>=0.1.0",
+    "mypy>=1.13.0,<2",
+    "jsonschema>=4.0.0",
+    "types-jsonschema>=4.0.0",
+    "types-toml>=0.10.0",
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "pytest-asyncio>=0.21.0",
+    "python-dotenv>=1.0.0",
+    "pytest-mock>=3.0.0",
+    "pyyaml>=6.0.0",
+    "types-PyYAML>=6.0.0",
+    "httpx>=0.28.0",
+    "gherkin-official>=29.0.0",
+    "griffe>=1.0.0",
+]
+
+[project.scripts]
+porto = "cli:main"
+
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = []
+package-dir = {"" = "scripts"}
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+# Enable formatting (replaces Black)
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "N",   # pep8-naming
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "SIM", # flake8-simplify
+]
+ignore = [
+    "E501", # line too long (handled by ruff format)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"surface/**" = ["SIM102", "SIM103", "SIM108"]
+"surface/tests/fixtures/**" = ["UP042"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["cli", "status", "setup", "sync", "lib", "hooks", "surface"]
+
+[tool.coverage.run]
+source = ["scripts"]
+omit = [
+    "scripts/matrix-*-sync.py",
+    "scripts/labs/*",
+    "scripts/parity-report.py",
+    "scripts/check_registry_deps.py",
+]
+
+[tool.coverage.report]
+fail_under = 90
+show_missing = true
+
+[tool.mypy]
+python_version = "3.13"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+check_untyped_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+show_error_codes = true
+namespace_packages = true
+# Avoid mypy 1.20+ INTERNAL ERROR (sqlite cache) on GHA / pre-commit
+sqlite_cache = false

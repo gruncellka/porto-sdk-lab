@@ -1,0 +1,40 @@
+{
+    "include": ["**/*.py"],
+    "exclude": [
+        "**/__pycache__",
+        "**/venv",
+        "**/.venv",
+        "**/node_modules",
+        "**/.pytest_cache",
+        "**/.mypy_cache",
+        "**/.ruff_cache"
+    ],
+    "typeCheckingMode": "basic",
+    "reportMissingImports": true,
+    "reportMissingTypeStubs": false,
+    "pythonVersion": "3.13",
+    "executionEnvironments": [
+        {
+            "root": ".",
+            "pythonVersion": "3.13",
+            "extraPaths": [
+                "sdks/porto-sdk-python"
+            ]
+        },
+        {
+            "root": "labs/python",
+            "pythonVersion": "3.13",
+            "venvPath": "labs/python",
+            "venv": "venv",
+            "extraPaths": [
+                "sdks/porto-sdk-python"
+            ]
+        },
+        {
+            "root": "sdks/porto-sdk-python",
+            "pythonVersion": "3.13",
+            "extraPaths": ["."],
+            "typeCheckingMode": "standard"
+        }
+    ]
+}

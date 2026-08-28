@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/gruncellka/porto-sdk-lab/blob/main/surface/contract/schema.yaml",
+  "title": "Porto SDK public contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "symbols"
+  ],
+  "properties": {
+    "added": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "removed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "symbols": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/symbol"
+      }
+    }
+  },
+  "$defs": {
+    "symbol": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string"
+        },
+        "canonical": {
+          "type": "string"
+        },
+        "python": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "typescript": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "members": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/member"
+          }
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "canonicalValues": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "signature": {
+          "type": [
+            "object",
+            "null"
+          ]
+        }
+      }
+    },
+    "member": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "canonical": {
+          "type": "string"
+        },
+        "returns": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "python": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "typescript": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "signature": {
+          "type": [
+            "object",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

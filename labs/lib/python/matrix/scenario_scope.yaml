@@ -1,0 +1,17 @@
+# Primary scenario countries for cross-provider BDD and wire matrix examples.
+# Used by Lab matrix tooling only — not parsed at SDK runtime.
+
+schema_version: 1
+
+primary_countries:
+  - DE
+  - UA
+  - FR
+  - US
+
+zone_example_country:
+  deutschepost:
+    domestic: DE
+    zone_1_eu: FR
+    zone_2_europe: UA
+    world: US

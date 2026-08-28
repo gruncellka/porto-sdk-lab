@@ -1,0 +1,35 @@
+---
+description: Porto SDK Lab — workspace locks, validation gates, and recovery hygiene
+alwaysApply: true
+---
+
+# Porto SDK Lab
+
+## Workspace role
+
+Coordination checkout for two SDK submodules plus `resources/porto-data` and `resources/porto-features`. Consumer apps are not part of this repo.
+
+## Resource lock
+
+`make local-resources` (Lab root) overlays the **current git checkouts** into both SDKs from the outside:
+
+- `resources/porto-data` (Lab: `b533125` / package **0.5.1**)
+- `resources/porto-features` (Lab: `03fba4a` / package **0.4.0**; includes letter-behavior Gherkin from `0d3ca53`+)
+
+Do not pin SDKs to published data `>=0.6.0`. Do not rebuild or edit porto-data / porto-features content for SDK alignment. Committed SDK manifests stay installable ranges (`>=0.5.1 <1.0.0` data, `>=0.4.0 <1.0.0` features). SDKs do not detect Lab topology.
+
+## Heavy provider API
+
+Internetmarke stays fail-closed (`Unknown channel` without credentials). Do not run `make heavy`, `test-api`, or `labs-internetmarke-*` from ordinary validation CI. SDK `heavy.yml` (manual) and `publish.yml` (mandatory before publish) run heavy with `I_ACCEPT_PAID_API_COST=1` and operator secrets. Lab does not publish SDK packages. Lab overlays (`local-resources`) are Lab `make` only — never on validation or publish runners.
+
+## Quality gates
+
+SDK local gate: `make check` then `make sdk` then `make adapters` (or `make validate`). Lab traces belong under `labs/**/artifacts/` and `surface/artifacts/` — no generic root dump.
+
+Public SDK façade (TS is SoT): ProviderClient `resolve` / `options` / `estimate` / `price` / `mark` / `track` / `capabilities` / `can` / `wallet`; envelopes `list` / `geometry` / `layout` / `identify` / `getMark`.
+
+Do not revive `porto-sdk-contract` or a handbook renderer as a product. `surface/` is an internal drift/parity tool only: `contract/` expect (YAML), `extract/` observe, `artifacts/` generated JSON-first (`python.json` / `typescript.json` / `report.json`; optional `report.md` view).
+
+## Commit boundaries
+
+Edit and commit Lab files here (`labs/`, `scripts/`, `tests/`, `docs/`, `surface/`, `.github/`, `.cursor/`, root config). SDK and resource file changes belong in those submodules. See [safe-edits.md](safe-edits.md) and [cross-repo.md](cross-repo.md).

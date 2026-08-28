@@ -1,0 +1,46 @@
+{
+    "name": "porto-lab-typescript",
+    "version": "0.0.1",
+    "description": "Porto SDK TypeScript Lab - Next.js integration sandbox",
+    "author": "Oleksandr Tsyba",
+    "license": "Apache-2.0",
+    "type": "module",
+    "scripts": {
+        "dev": "next dev -H 0.0.0.0 -p 3000",
+        "build": "next build",
+        "start": "next start -H 0.0.0.0 -p 3000",
+        "example:integration": "tsx example_nextjs_integration.ts",
+        "example:basic": "tsx example_basic.ts",
+        "example:portokasse": "tsx example_portokasse_link_check.ts",
+        "example:api-version": "tsx example_api_version_check.ts",
+        "experiment:canary": "tsx ../experiments/internetmarke/order_matrix.ts",
+        "experiment:full": "PROFILE=full tsx ../experiments/internetmarke/order_matrix.ts",
+        "example:cli-provider": "tsx example_cli_provider.ts",
+        "setup": "./setup.sh",
+        "format": "biome format --write .",
+        "lint": "biome check .",
+        "check": "biome check ."
+    },
+    "dependencies": {
+        "@gruncellka/porto-data": "file:../../resources/porto-data",
+        "@gruncellka/porto-sdk": "file:../../sdks/porto-sdk-typescript",
+        "dotenv": "^16.6.1",
+        "next": "^15.5.14",
+        "react": "^19.2.4",
+        "react-dom": "^19.2.4"
+    },
+    "pnpm": {
+        "overrides": {
+            "@gruncellka/porto-data": "file:../../resources/porto-data"
+        }
+    },
+    "devDependencies": {
+        "@biomejs/biome": "^1.9.4",
+        "@gruncellka/porto-features": "file:../../resources/porto-features",
+        "@types/node": "^20.19.37",
+        "@types/react": "^19.2.14",
+        "@types/react-dom": "^19.2.3",
+        "tsx": "^4.21.0",
+        "typescript": "^5.9.3"
+    }
+}

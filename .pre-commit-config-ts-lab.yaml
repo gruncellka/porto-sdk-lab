@@ -1,0 +1,14 @@
+# Pre-commit configuration for TypeScript Lab
+#
+# Run: pre-commit run --config .pre-commit-config-ts-lab.yaml --all-files
+
+repos:
+    - repo: local
+      hooks:
+          - id: lint
+            name: lint
+            entry: bash -c 'cd labs/typescript && npx --yes @biomejs/biome@2.4.15 check --write --unsafe .'
+            language: system
+            files: ^labs/typescript/.*\.(ts|tsx|js|jsx)$
+            exclude: node_modules|dist
+            pass_filenames: false

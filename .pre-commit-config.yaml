@@ -1,0 +1,67 @@
+# Pre-commit — cheap local hygiene for Lab-owned Python (scripts/, tests/, surface/)
+#
+# Submodules (resources/, sdks/) validate in their own repos.
+# Full health: make validate
+
+exclude: ^(resources|sdks)/
+
+repos:
+    - repo: local
+      hooks:
+          - id: guard-submodule-pointer-commit
+            name: Guard accidental submodule ref commit
+            entry: bash -c '. venv/bin/activate 2>/dev/null || true && python3 scripts/hooks/guard_submodule_refs.py'
+            language: system
+            pass_filenames: false
+            always_run: true
+
+          - id: check-gitignore
+            name: Block tracked lab/run artifacts and secrets paths
+            entry: bash -c '. venv/bin/activate 2>/dev/null || true && python3 scripts/check_gitignore.py'
+            language: system
+            pass_filenames: false
+            always_run: true
+
+          - id: ruff-format-scripts
+            name: Ruff Format (Scripts & Tests)
+            entry: bash -c '. venv/bin/activate 2>/dev/null || true && ruff format --line-length=100 "$@"' --
+            language: system
+            files: ^(scripts|tests|surface)/.*\.py$
+            exclude: ^labs/
+            pass_filenames: true
+
+          - id: ruff-scripts
+            name: Ruff Lint (Scripts & Tests)
+            entry: bash -c '. venv/bin/activate 2>/dev/null || true && ruff check --fix "$@"' --
+            language: system
+            files: ^(scripts|tests|surface)/.*\.py$
+            exclude: ^labs/
+            pass_filenames: true
+
+          - id: mypy-scripts
+            name: MyPy Type Check (Scripts)
+            entry: bash -c '[ $# -eq 0 ] && exit 0; . venv/bin/activate 2>/dev/null || true && mypy --config-file=pyproject.toml --no-sqlite-cache "$@"' --
+            language: system
+            files: ^scripts/.*\.py$
+            exclude: ^labs/
+            pass_filenames: true
+
+    - repo: https://github.com/pre-commit/pre-commit-hooks
+      rev: v5.0.0
+      hooks:
+          - id: check-added-large-files
+            args: ['--maxkb=300']
+            exclude: ^(venv|labs)/
+          - id: check-merge-conflict
+          - id: check-case-conflict
+          - id: no-commit-to-branch
+            args: ['--branch', 'main']
+          - id: detect-private-key
+          - id: check-json
+            exclude: ^(labs|\.vscode)/
+          - id: check-yaml
+            exclude: ^(venv|labs)/
+          - id: end-of-file-fixer
+            exclude: ^(venv|labs)/
+          - id: trailing-whitespace
+            exclude: ^(venv|labs)/

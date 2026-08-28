@@ -1,0 +1,160 @@
+# =============================================================================
+# Dependencies
+# =============================================================================
+node_modules/
+**/node_modules/
+.tools/
+
+.pnpm-store/
+.npm/
+.yarn/
+.pnp.*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# =============================================================================
+# Python
+# =============================================================================
+venv/
+**/venv/
+.venv/
+**/.venv/
+labs/**/venv/
+sdks/**/venv/
+
+__pycache__/
+**/__pycache__/
+*.py[cod]
+**/*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info/
+**/*.egg-info/
+.eggs/
+pip-log.txt
+
+.pytest_cache/
+**/.pytest_cache/
+.mypy_cache/
+**/.mypy_cache/
+.ruff_cache/
+**/.ruff_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.tox/
+.nox/
+.hypothesis/
+
+# =============================================================================
+# Node / JavaScript / TypeScript builds
+# =============================================================================
+.next/
+**/.next/
+out/
+**/out/
+.nuxt/
+**/.nuxt/
+.turbo/
+**/.turbo/
+.vercel/
+**/.vercel/
+
+dist/
+**/dist/
+build/
+**/build/
+*.tsbuildinfo
+**/*.tsbuildinfo
+
+# =============================================================================
+# Secrets & local env (never commit — only .env.example is tracked)
+# =============================================================================
+.env
+**/.env
+.env.*
+**/.env.*
+!.env.example
+!**/.env.example
+*.env.local
+test_credentials.env
+**/test_credentials.env
+
+*.pem
+*.key
+*.p12
+*.pfx
+
+# =============================================================================
+# IDE & editors
+# =============================================================================
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-*
+
+# =============================================================================
+# OS
+# =============================================================================
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+Desktop.ini
+
+# =============================================================================
+# Logs & temp
+# =============================================================================
+*.log
+logs/
+*.tmp
+*.temp
+.cache/
+**/.cache/
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+coverage/
+.nyc_output/
+
+# =============================================================================
+# Surface tool — generated extract/report/stubs only (never commit)
+# Track: surface/*.py, extract/, contract/, tests/, package.json + lock
+# =============================================================================
+surface/artifacts/**
+!surface/artifacts/.gitkeep
+surface/node_modules/
+
+# =============================================================================
+# Lab experiment output (local evidence — never commit HTTP/stamps/auth)
+# Commit scripts/README/profiles only — not runs or artifacts.
+# =============================================================================
+labs/experiments/runs/*
+!labs/experiments/runs/.gitkeep
+labs/experiments/latest
+labs/**/artifacts/
+labs/**/api_test_results/
+labs/experiments/**/*.png
+labs/experiments/**/*.pdf
+labs/experiments/**/*.zip
+
+# =============================================================================
+# Root artifact dump safety net (prefer labs/ or surface/ paths)
+# =============================================================================
+artifacts/*
+!artifacts/.gitkeep
+
+# =============================================================================
+# Docker / local runtime (optional overrides)
+# =============================================================================
+docker-compose.override.yml

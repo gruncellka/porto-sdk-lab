@@ -1,0 +1,78 @@
+differences:
+  - id: data_loading
+    python: Porto Data may load from package or filesystem resources
+    typescript: Porto Data may load from bundle or browser-safe resources
+    contract: same public Porto Data meaning
+  - id: resolve_async
+    symbol: ProviderClient
+    member: resolve
+    parity: exempt-async
+    python: sync
+    typescript: Promise
+    contract: same resolve()
+  - id: price_async
+    symbol: ProviderClient
+    member: price
+    parity: exempt-async
+    python: sync
+    typescript: Promise
+    contract: same price()
+  - id: pydantic_vs_zod
+    python: Pydantic models
+    typescript: Zod / structural types
+    contract: same field meaning
+  - id: snake_vs_camel
+    python: snake_case parameters and fields
+    typescript: camelCase parameters and fields
+    contract: same canonical names after case fold
+  - id: layout_options_bag
+    symbol: Envelopes
+    member: layout
+    python: positional jurisdiction/product_id plus zone_id/service_ids kwargs
+    typescript: options bag for zoneId/serviceIds
+    contract: same layout join
+  - id: get_mark_options_bag
+    symbol: Envelopes
+    member: getMark
+    python: kwargs envelope_id/zone_id/service_ids
+    typescript: options bag
+    contract: same mark facts
+  - id: config_default_optional
+    python: required field with a default
+    typescript: optional property
+    contract: omit uses the same default
+  - id: transport_timeout_optional
+    symbol: TransportConfig
+    member: timeout
+    parity: exempt-optional
+    python: timedelta default
+    typescript: optional seconds
+    contract: same transport timeout
+  - id: transport_backoff_optional
+    symbol: TransportConfig
+    member: backoff
+    parity: exempt-optional
+    python: timedelta default
+    typescript: optional seconds
+    contract: same transport backoff
+  - id: transport_retries_optional
+    symbol: TransportConfig
+    member: retries
+    parity: exempt-optional
+    python: int default
+    typescript: optional number
+    contract: same retry count
+  - id: execution_output_mime_optional
+    symbol: ExecutionParameters
+    member: outputMime
+    parity: exempt-optional
+    python: MarkOutputMime default
+    typescript: optional mime
+    contract: same default PNG
+  - id: strict_data_validation_optional
+    symbol: PortoConfig
+    member: strictDataValidation
+    parity: exempt-optional
+    python: bool default True
+    typescript: optional boolean
+    contract: same catalog validation switch

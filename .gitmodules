@@ -1,0 +1,32 @@
+# Submodules of porto-sdk-lab.
+#
+# Scope: ONLY the Porto SDK and its supporting resources.
+#
+#   resources/porto-data      - shared postal data (dev/lab)
+#   resources/porto-features  - shared BDD features (dev/lab)
+#   sdks/porto-sdk-python     - Python SDK
+#   sdks/porto-sdk-typescript - TypeScript SDK
+#
+# HTTPS URLs so GitHub Actions can clone without SSH keys.
+# Local SSH preference (optional):
+#   git config url."git@github.com:".insteadOf "https://github.com/"
+
+[submodule "resources/porto-data"]
+	path = resources/porto-data
+	url = https://github.com/gruncellka/porto-data.git
+	type = resource
+
+[submodule "resources/porto-features"]
+	path = resources/porto-features
+	url = https://github.com/gruncellka/porto-features.git
+	type = resource
+
+[submodule "sdks/porto-sdk-python"]
+	path = sdks/porto-sdk-python
+	url = https://github.com/gruncellka/porto-sdk-python.git
+	type = sdk
+
+[submodule "sdks/porto-sdk-typescript"]
+	path = sdks/porto-sdk-typescript
+	url = https://github.com/gruncellka/porto-sdk-typescript.git
+	type = sdk

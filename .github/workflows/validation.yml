@@ -1,0 +1,144 @@
+name: validation
+
+on:
+    push:
+        branches:
+            - '**'
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref_name }}
+    cancel-in-progress: true
+
+permissions:
+    contents: read
+
+env:
+    PYTHON_VERSION: '3.13'
+    NODE_VERSION: '22'
+
+jobs:
+    lint:
+        name: lint
+        runs-on: ubuntu-22.04
+        steps:
+            - uses: actions/checkout@v5
+            - uses: actions/setup-python@v6
+              with:
+                  python-version: ${{ env.PYTHON_VERSION }}
+                  cache: 'pip'
+            - name: Bootstrap workspace
+              run: make
+            - name: Pre-commit hygiene
+              env:
+                  SKIP: no-commit-to-branch
+              run: make lint
+
+    lint-py:
+        name: lint-py
+        runs-on: ubuntu-22.04
+        steps:
+            - uses: actions/checkout@v5
+            - uses: actions/setup-python@v6
+              with:
+                  python-version: ${{ env.PYTHON_VERSION }}
+                  cache: 'pip'
+            - name: Bootstrap workspace
+              run: make
+            - name: Python lab lint
+              run: make lint-py
+
+    lint-ts:
+        name: lint-ts
+        runs-on: ubuntu-22.04
+        steps:
+            - uses: actions/checkout@v5
+            - uses: actions/setup-python@v6
+              with:
+                  python-version: ${{ env.PYTHON_VERSION }}
+                  cache: 'pip'
+            - uses: actions/setup-node@v5
+              with:
+                  node-version: ${{ env.NODE_VERSION }}
+            - name: Bootstrap workspace
+              run: make
+            - name: TypeScript lab lint
+              run: make lint-ts
+
+    test:
+        name: test
+        runs-on: ubuntu-22.04
+        steps:
+            - uses: actions/checkout@v5
+              with:
+                  submodules: true
+            - uses: actions/setup-python@v6
+              with:
+                  python-version: ${{ env.PYTHON_VERSION }}
+                  cache: 'pip'
+            - name: Bootstrap workspace
+              run: make
+            - name: Lab workspace tests
+              run: make test-scripts
+            - name: Upload coverage
+              uses: codecov/codecov-action@v6
+              continue-on-error: true
+              with:
+                  token: ${{ secrets.CODECOV_TOKEN }}
+                  files: ./coverage.xml
+
+    matrix:
+        name: matrix
+        runs-on: ubuntu-22.04
+        steps:
+            - uses: actions/checkout@v5
+              with:
+                  submodules: true
+            - uses: actions/setup-python@v6
+              with:
+                  python-version: ${{ env.PYTHON_VERSION }}
+                  cache: 'pip'
+            - name: Bootstrap workspace
+              run: make
+            - name: Matrix drift check
+              run: make matrix-sync-check
+            - name: Paid CI safety gate
+              run: make check-paid-ci-safety
+
+    surface:
+        name: surface
+        runs-on: ubuntu-22.04
+        steps:
+            - uses: actions/checkout@v5
+              with:
+                  submodules: recursive
+            - uses: actions/setup-python@v6
+              with:
+                  python-version: ${{ env.PYTHON_VERSION }}
+                  cache: 'pip'
+            - uses: actions/setup-node@v5
+              with:
+                  node-version: ${{ env.NODE_VERSION }}
+            - name: Bootstrap workspace
+              run: make
+            - name: Install surface TypeDoc tooling
+              run: |
+                  cd surface
+                  npm ci
+            - name: Public surface check
+              run: make surface-check
+
+    validate:
+        name: validate
+        runs-on: ubuntu-22.04
+        needs: [lint, lint-py, lint-ts, test, matrix, surface]
+        if: ${{ always() }}
+        steps:
+            - name: Require leaf jobs
+              run: |
+                  test "${{ needs.lint.result }}" = "success"
+                  test "${{ needs.lint-py.result }}" = "success"
+                  test "${{ needs.lint-ts.result }}" = "success"
+                  test "${{ needs.test.result }}" = "success"
+                  test "${{ needs.matrix.result }}" = "success"
+                  test "${{ needs.surface.result }}" = "success"
+                  echo "Lab validation passed"

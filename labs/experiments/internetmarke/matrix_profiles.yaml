@@ -1,0 +1,25 @@
+canary:
+  execution: manual
+  purchases: true
+  max_cases: 1
+  voucher_layout: ADDRESS_ZONE
+full:
+  execution: manual
+  purchases: true
+  max_cases: null
+  voucher_layout: ADDRESS_ZONE
+franking_canary:
+  execution: manual
+  purchases: true
+  max_cases: 4
+  voucher_layout: FRANKING_ZONE
+franking_full:
+  execution: manual
+  purchases: true
+  max_cases: null
+  voucher_layout: FRANKING_ZONE
+dry_run:
+  execution: auto_ok
+  purchases: false
+  max_cases: null
+  voucher_layout: ADDRESS_ZONE

@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "charlespierce.ruff",
+    "esbenp.prettier-vscode",
+    "emeraldwalk.RunOnSave"
+  ]
+}

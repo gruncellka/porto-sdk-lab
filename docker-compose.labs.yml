@@ -1,0 +1,44 @@
+services:
+  lab-py:
+    image: python:3.13-slim-bookworm
+    pull_policy: missing
+    container_name: porto-lab-py
+    working_dir: /workspace/labs/python
+    env_file:
+      - path: .env
+        required: false
+    volumes:
+      - ./:/workspace
+      - lab_py_venv:/workspace/labs/python/venv
+      - lab_py_pip_cache:/root/.cache/pip
+    command: sleep infinity
+    tty: true
+    stdin_open: true
+
+  lab-ts:
+    image: node:22-bookworm-slim
+    pull_policy: missing
+    container_name: porto-lab-ts
+    working_dir: /workspace/labs/typescript
+    env_file:
+      - path: .env
+        required: false
+    volumes:
+      - ./:/workspace
+      - lab_ts_node_modules:/workspace/labs/typescript/node_modules
+      - lab_ts_pnpm_store:/root/.local/share/pnpm/store
+      - lab_ts_sdk_node_modules:/workspace/sdks/porto-sdk-typescript/node_modules
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+      WATCHPACK_POLLING: "true"
+      TSC_WATCHFILE: UseFsEventsWithFallbackDynamicPolling
+    command: sleep infinity
+    tty: true
+    stdin_open: true
+
+volumes:
+  lab_py_venv:
+  lab_py_pip_cache:
+  lab_ts_node_modules:
+  lab_ts_pnpm_store:
+  lab_ts_sdk_node_modules:

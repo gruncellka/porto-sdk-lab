@@ -1,0 +1,30 @@
+[project]
+name = "porto-lab-python"
+version = "0.0.1"
+description = "Porto SDK Python Lab - FastAPI integration sandbox"
+license = {text = "Apache-2.0"}
+authors = [{name = "Oleksandr Tsyba"}]
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi>=0.116.0",
+    "httpx>=0.28.0",
+    "python-dotenv>=1.0.0",
+    "uvicorn[standard]>=0.35.0",
+]
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.pyright]
+include = ["**/*.py"]
+exclude = ["**/__pycache__", "**/venv", "**/.venv"]
+venvPath = "."
+venv = "venv"
+pythonVersion = "3.13"
+typeCheckingMode = "basic"
+reportMissingImports = true
+reportMissingTypeStubs = false
+executionEnvironments = [
+    { root = ".", pythonVersion = "3.13", extraPaths = ["../../sdks/porto-sdk-python"] }
+]

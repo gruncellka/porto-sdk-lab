@@ -1,0 +1,74 @@
+{
+  // Python formatting
+  "[python]": {
+    "editor.defaultFormatter": "charlespierce.ruff",
+    "editor.formatOnSave": true
+  },
+
+  // Python language server (Pylance)
+  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.diagnosticMode": "workspace",
+  "python.analysis.extraPaths": [
+    "${workspaceFolder}/packages/porto-sdk-python/src",
+    "${workspaceFolder}/labs/python"
+  ],
+
+  // TypeScript formatting
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+
+  // JSON / JSONC: 2 spaces (matches format_json_file.py indent=2). jsonc = .vscode/settings.json etc.
+  "[json]": {
+    "editor.formatOnSave": false,
+    "editor.tabSize": 2,
+    "editor.indentSize": 2,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false
+  },
+  "[jsonc]": {
+    "editor.formatOnSave": false,
+    "editor.tabSize": 2,
+    "editor.indentSize": 2,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false
+  },
+
+  // Run on Save: format porto_data JSON with Python (same as make format-json)
+  "emeraldwalk.runonsave": {
+    "commands": [
+      {
+        "match": ".*porto_data.*\\.json$",
+        "cmd": "python3 ${workspaceFolder}/resources/porto-data/scripts/format_json_file.py ${file}"
+      }
+    ]
+  },
+
+  // Ruff (reads from pyproject.toml automatically)
+  "ruff.enable": true,
+
+  // TypeScript: Use workspace TypeScript version
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+
+  // Hide build artifacts and dependencies
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/*.pyc": true,
+    "**/node_modules": true,
+    "**/venv": true,
+    "**/.venv": true,
+    "**/.pytest_cache": true,
+    "**/.mypy_cache": true,
+    "**/.ruff_cache": true
+  },
+  "cursorpyright.analysis.autoImportCompletions": true,
+  "cursorpyright.analysis.diagnosticMode": "workspace",
+  "cursorpyright.analysis.extraPaths": [
+    "${workspaceFolder}/packages/porto-sdk-python/src",
+    "${workspaceFolder}/labs/python"
+  ],
+  "cursorpyright.analysis.typeCheckingMode": "basic"
+}

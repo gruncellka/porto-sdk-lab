@@ -1,0 +1,55 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Porto TS: restrict (dist)",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/sdks/porto-sdk-typescript/dist/cli.js",
+            "args": ["restrict", "--country", "UA", "--json"],
+            "cwd": "${workspaceFolder}/sdks/porto-sdk-typescript",
+            "env": {
+                "PORTO_DATA_PATH": "${workspaceFolder}/resources/porto-data/porto_data"
+            },
+            "console": "integratedTerminal",
+            "sourceMaps": true,
+            "outFiles": ["${workspaceFolder}/sdks/porto-sdk-typescript/dist/**/*.js"]
+        },
+        {
+            "name": "Porto TS: calc (dist)",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/sdks/porto-sdk-typescript/dist/cli.js",
+            "args": [
+                "calc",
+                "--type",
+                "standard",
+                "--country",
+                "DE",
+                "--weight",
+                "20",
+                "--json"
+            ],
+            "cwd": "${workspaceFolder}/sdks/porto-sdk-typescript",
+            "env": {
+                "PORTO_DATA_PATH": "${workspaceFolder}/resources/porto-data/porto_data"
+            },
+            "console": "integratedTerminal",
+            "sourceMaps": true,
+            "outFiles": ["${workspaceFolder}/sdks/porto-sdk-typescript/dist/**/*.js"]
+        },
+        {
+            "name": "Porto Python: restrict (module)",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "porto_sdk.cli",
+            "args": ["restrict", "--country", "UA", "--json"],
+            "cwd": "${workspaceFolder}/sdks/porto-sdk-python",
+            "env": {
+                "PORTO_DATA_PATH": "${workspaceFolder}/resources/porto-data/porto_data"
+            },
+            "console": "integratedTerminal",
+            "justMyCode": false
+        }
+    ]
+}

@@ -1,0 +1,225 @@
+# Public surface policy for Lab surface/ (internal drift/parity tool).
+# Authored expect baseline — not a handbook / pages renderer.
+#
+# Contract may describe only:
+#   concepts, symbols, members, types, errors, enums,
+#   intentional differences (see difference.yml), deny/allow rules.
+
+concepts:
+  - id: envelope_layout_join
+    summary: >
+      layout() joins independent facts: envelope face from envelopes.json,
+      optional window from layouts.json (selected by jurisdiction),
+      optional mark from marks.json (selected by provider/profile).
+      Absence is omission, never fallback. No implicit DE jurisdiction.
+    members:
+      - layout
+      - geometry
+      - list
+      - getMark
+
+# Root public symbols (machine SoT). Extracted names not in this list → extra_symbol.
+allowlist_symbols:
+  - PortoClient
+  - ProviderClient
+  - Envelopes
+  - Restrictions
+  - LegalRestriction
+  - RoutingRestriction
+  - RestrictionImpact
+  - RestrictionJurisdiction
+  - JurisdictionInstrument
+  - ResolutionRequest
+  - Porto
+  - PortoMarkRequest
+  - PortoMark
+  - Address
+  - Dimensions
+  - ProductOption
+  - ServiceOption
+  - Advice
+  - Estimate
+  - MarkExecution
+  - DeliveryHint
+  - WorkingDaysHint
+  - ServiceKind
+  - FeatureKind
+  - Requirement
+  - MarkType
+  - TrackingMode
+  - PortoError
+  - PortoErrorCode
+  - PortoConfig
+  - CacheConfig
+  - TransportConfig
+  - WireConfig
+  - ProviderRuntimeConfig
+  - ExecutionParameters
+  - EnvelopeIdentity
+  - TrackingStatus
+  - Balance
+  - ProviderCapabilities
+  - Pricing
+  - PriceInput
+  - PriceComponent
+  - CapabilityState
+  - Match
+  - StrictMatch
+  - AdvisoryMatch
+  - NoMatch
+  - EnvelopeSheet
+  - EnvelopeRect
+  - EnvelopeSize
+  - Envelope
+  - EnvelopeGeometry
+  - EnvelopeLayout
+  - EnvelopeMarkFact
+  - EnvelopeMark
+  - MarkOutputMime
+
+# Deny member names. Filter folds snake_case → camelCase, so list one spelling.
+# Pydantic / Error internals on types that have no member allowlist (Address, Porto, …).
+# Retired 0.0.1 verbs (advise, prepare, bytes, registered, match, …) are excluded by
+# allowlist_by_symbol on PortoClient / ProviderClient / Envelopes / Restrictions / PortoConfig /
+# ProviderCapabilities — do not repeat them here.
+denylist_global:
+  - model_config
+  - trim_whitespace
+  - validateCountryCode
+  - validatePostalCode
+  - construct
+  - copy
+  - dict
+  - json
+  - parse_obj
+  - parse_raw
+  - schema
+  - schema_json
+  - update_forward_refs
+  - from_orm
+  - Config
+
+denylist_by_symbol:
+  PortoError:
+    - captureStackTrace
+    - prepareStackTrace
+    - stackTraceLimit
+    - stack
+    - cause
+    - name
+
+# Allow rules: when set for a symbol, only these members stay public (after deny).
+allowlist_by_symbol:
+  PortoClient:
+    - config
+    - providers
+    - provider
+    - envelopes
+    - restrictions
+    - jurisdictions
+    - address
+  Envelopes:
+    - list
+    - geometry
+    - layout
+    - identify
+    - getMark
+  Restrictions:
+    - impact
+    - legal
+    - routing
+  ProviderClient:
+    - resolve
+    - options
+    - price
+    - mark
+    - track
+    - capabilities
+    - can
+    - wallet
+    - restrictions
+  ProviderCapabilities:
+    - mark
+    - track
+    - wallet
+    - trackingKind
+  PortoConfig:
+    - providers
+    - data
+    - cache
+    - transport
+    - strictDataValidation
+
+# Opaque maps that are part of the public contract (not nested public types).
+baggy_allowed:
+  - PortoMarkRequest.design
+  - ExecutionParameters.credentials
+  - WireConfig.credentials
+  - Envelopes.identify
+  - Envelopes.layout
+  - Envelopes.getMark
+  - Restrictions.legal
+  - Restrictions.routing
+  - LegalRestriction.jurisdictions
+  - ProductOption.services
+  - ProviderClient.can
+  - ProviderClient.price
+  - ProviderClient.resolve
+  - PortoError.details
+  - PortoError.providerError
+  - PortoError.provider_error
+
+# Nested types referenced from allowlisted symbols (not root exports).
+closure_allow:
+  - AdvisoryReason
+  - NoMatchReason
+  - DeliverySpan
+  - DeliveryWeekdays
+  - DeliveryPreference
+  - MarkOutputMime
+  - PriceInput
+  - PriceComponentKind
+  - TrackingKind
+  - PortoProduct
+  - PortoZone
+  - PortoWeightTier
+  - Feature
+  - Service
+  - ProductIndemnityOption
+  - BillingService
+  - TrackingService
+  - AddressResolver
+  - JurisdictionsService
+  - ProvidersService
+  - TrackingState
+  - TrackingEvent
+  - ProviderId
+  - WireId
+  - Seconds
+  - IdentifyEnvelopeInput
+  - ListProductOptionsInput
+  - ServiceOption
+  - RestrictionJurisdiction
+  - JurisdictionInstrument
+  - RestrictionImpact
+  - LegalRestriction
+  - RoutingRestriction
+  - RestrictionsService
+  - AdviceAction
+  - AdviceReason
+  - MarkRequest
+  - Date
+  - datetime
+
+# Resolved-output fields: key always present; null is explicit (never omit).
+# Parity fails if either SDK marks the member optional (`?` / default-omit).
+required_null_members:
+  - Restrictions.impact
+  - JurisdictionInstrument.reference
+  - JurisdictionInstrument.effectiveFrom
+  - JurisdictionInstrument.effectiveTo
+  - ServiceOption.amount
+  - ServiceOption.kind
+  - EnvelopeIdentity.format
+  - ProductOption.markType
+  - ProductOption.tracking
