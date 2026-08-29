@@ -29,8 +29,6 @@ jobs:
             - name: Bootstrap workspace
               run: make
             - name: Pre-commit hygiene
-              env:
-                  SKIP: no-commit-to-branch
               run: make lint
 
     lint-py:

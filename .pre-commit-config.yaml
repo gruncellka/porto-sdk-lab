@@ -54,8 +54,6 @@ repos:
             exclude: ^(venv|labs)/
           - id: check-merge-conflict
           - id: check-case-conflict
-          - id: no-commit-to-branch
-            args: ['--branch', 'main']
           - id: detect-private-key
           - id: check-json
             exclude: ^(labs|\.vscode)/

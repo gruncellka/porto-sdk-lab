@@ -344,7 +344,7 @@ lint: ## Run pre-commit on all files (cheap local hygiene)
 		echo "Error: Workspace venv not found. Run 'make' first."; \
 		exit 1; \
 	fi
-	@. venv/bin/activate && SKIP=no-commit-to-branch,guard-submodule-pointer-commit pre-commit run --all-files
+	@. venv/bin/activate && SKIP=guard-submodule-pointer-commit pre-commit run --all-files
 
 lint-py: ## Run pre-commit on Python lab only
 	@if [ ! -d "venv" ]; then \

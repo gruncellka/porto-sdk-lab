@@ -118,6 +118,19 @@ Copy [`.env.example`](.env.example) → `.env` (gitignored). Fill `PORTO_DEUTSCH
 
 Do not commit `labs/experiments/runs/`, `labs/experiments/latest`, or `labs/**/artifacts/` (stamps, auth JSON, HTTP traces). Commit experiment scripts only — see [`labs/experiments/internetmarke/README.md`](labs/experiments/internetmarke/README.md).
 
+## Versioning (Lab workspace only)
+
+Lab is **not** a published package. Tags mark workspace milestones (pins / tooling), not a deploy.
+
+```bash
+pip install bump2version   # or: pip install -e '.[dev]'
+bump2version patch         # also: minor | major
+# commits pyproject.toml + creates git tag vX.Y.Z (tag = True)
+git push && git push --tags
+```
+
+Config: [`.bumpversion.cfg`](.bumpversion.cfg). No GitHub Release / PyPI publish for Lab.
+
 ## Useful commands
 
 | Command | Purpose |
