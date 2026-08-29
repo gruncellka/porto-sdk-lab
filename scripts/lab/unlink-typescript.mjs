@@ -24,6 +24,12 @@ for (const pkg of ["porto-data", "porto-features"]) {
     }
 }
 
+if (process.env.PORTO_LAB_SKIP_INSTALL === "1") {
+    rmSync(join(sdkRoot, "node_modules", ".porto-lab"), { force: true });
+    console.log("TypeScript SDK lab marker cleared (pnpm install skipped).");
+    process.exit(0);
+}
+
 const install = spawnSync("pnpm", ["install", "--frozen-lockfile"], {
     cwd: sdkRoot,
     stdio: "inherit",
@@ -33,5 +39,5 @@ if (install.status !== 0) {
     process.exit(install.status ?? 1);
 }
 
-rmSync(join(sdkRoot, "node_modules", ".porto-local-resources"), { force: true });
+rmSync(join(sdkRoot, "node_modules", ".porto-lab"), { force: true });
 console.log("TypeScript SDK registry packages restored.");

@@ -26,4 +26,4 @@ fi
 .venv/bin/pip install -e "$DATA"
 .venv/bin/pip install -e "$FEATURES"
 .venv/bin/pip install -e ".[dev]"
-echo "Python SDK local resources linked (Lab-owned)."
+echo "Python SDK lab package mode linked (Lab-owned)."

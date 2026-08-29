@@ -2,7 +2,7 @@
 
 **Purpose:** Narrative for the **platform-agnostic** Porto SDK public surface — catalogs, provider verbs, envelope matching, stability rules, and open-source release gates.
 
-**Audience:** SDK contributors, external adopters, and product integrators (Licko ships via a thin adapter; see Licko [`porto-sdk.md`](../../../licko-app/docs/reference/porto-sdk.md) for vend + HTTP mapping only).
+**Audience:** SDK contributors, external adopters, and product integrators that consume the published packages via a thin adapter.
 
 **Public API reference:** [public.md](public.md) wins when this narrative disagrees. Layers: [architecture.md](architecture.md). Identity: [public.md](public.md).
 

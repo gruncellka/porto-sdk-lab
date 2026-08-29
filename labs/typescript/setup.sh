@@ -96,7 +96,7 @@ setup_sdk_package() {
     fi
 
     echo "   - Linking local resource packages into SDK node_modules (Lab-owned) ..."
-    node "$(cd "$sdk_path/../.." && pwd)/scripts/sdk-local-resources/link-typescript.mjs" "$sdk_path"
+    node "$(cd "$sdk_path/../.." && pwd)/scripts/lab/link-typescript.mjs" "$sdk_path"
 
     local had_dist=0
     if [ -d "$sdk_path/dist" ]; then

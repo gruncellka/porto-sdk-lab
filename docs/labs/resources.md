@@ -1,29 +1,27 @@
-# Lab local resource overlays
+# Lab package overlays (`lab` / `registry`)
 
 **Architecture:** Committed SDK manifests always use **registry semver**. Lab wiring swaps the **installed package instance** in venv / `node_modules` without changing manifests. Production integrators use pip/npm only — see [../sdks/dependency.md](../sdks/dependency.md).
 
-SDKs do **not** detect Lab topology. Overlays are Lab-owned and invoked from the Lab root.
+Disk nouns `sdks/` and `resources/` stay; Make verbs are **`lab`** (local checkouts) and **`registry`** (published). SDKs do **not** detect Lab topology. Overlays are Lab-owned and invoked from the Lab root only. This repo does not wire consumer apps.
 
-## Overlay both SDKs
+## Apply / restore
 
 From Lab root:
 
 ```bash
-make local-resources
+make lab
 ```
 
-Restores registry packages:
-
 ```bash
-make registry-resources
+make registry
 ```
 
 ## What runs
 
 | SDK | Overlay | Restore |
 | --- | --- | --- |
-| Python | `scripts/sdk-local-resources/overlay-python.sh` → `pip install -e` Lab `resources/*` into SDK `.venv` | `restore-python.sh` |
-| TypeScript | `scripts/sdk-local-resources/link-typescript.mjs` → symlink into SDK `node_modules` | `unlink-typescript.mjs` |
+| Python | `scripts/lab/overlay-python.sh` → `pip install -e` Lab `resources/*` into SDK `.venv` | `restore-python.sh` |
+| TypeScript | `scripts/lab/link-typescript.mjs` → symlink into SDK `node_modules` | `unlink-typescript.mjs` |
 
 Docker lab setup (`labs/typescript/setup.sh`) calls the Lab link script with an absolute path to the SDK checkout.
 

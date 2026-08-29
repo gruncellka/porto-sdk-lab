@@ -1,4 +1,4 @@
-.PHONY: . help setup setup-repos setup-all status health check-packages check-gitignore validate lint lint-py lint-ts test test-all test-packages-py test-packages-ts test-packages-bdd test-scripts matrix-orders-sync matrix-orders-sync-check matrix-sdk-sync matrix-sdk-sync-check matrix-sync matrix-sync-check parity-report parity-report-check check-paid-ci-safety promote-evidence surface surface-check surface-structure sm-sync sm-sync-safe sm-sync-remote sm-sync-remote-safe sm-reset-danger install-hooks local-resources registry-resources labs-verify labs-up labs-up-py labs-up-ts labs-down labs-setup labs-setup-py labs-setup-ts labs-shell-py labs-shell-ts labs-run-py labs-run-ts labs-watch-py labs-watch-ts labs-observe-py labs-observe-ts labs-internetmarke-preflight labs-internetmarke-gate-check labs-internetmarke-post-approval labs-internetmarke-canary labs-internetmarke-full labs-internetmarke-calibration-matrix labs-internetmarke-measure labs-internetmarke-calibration labs-internetmarke-py labs-internetmarke-ts labs-clean clean clean-py clean-ts clean-sdks clean-deps clean-repos clean-all clean-nuclear
+.PHONY: . help setup setup-repos setup-all status health check-packages check-gitignore validate lint lint-py lint-ts test test-all test-packages-py test-packages-ts test-packages-bdd test-scripts matrix-orders-sync matrix-orders-sync-check matrix-sdk-sync matrix-sdk-sync-check matrix-sync matrix-sync-check parity-report parity-report-check check-paid-ci-safety promote-evidence surface surface-check surface-structure sm-sync sm-sync-safe sm-sync-remote sm-sync-remote-safe sm-reset-danger install-hooks lab registry labs-verify labs-up labs-up-py labs-up-ts labs-down labs-setup labs-setup-py labs-setup-ts labs-shell-py labs-shell-ts labs-run-py labs-run-ts labs-watch-py labs-watch-ts labs-observe-py labs-observe-ts labs-internetmarke-preflight labs-internetmarke-gate-check labs-internetmarke-post-approval labs-internetmarke-canary labs-internetmarke-full labs-internetmarke-calibration-matrix labs-internetmarke-measure labs-internetmarke-calibration labs-internetmarke-py labs-internetmarke-ts labs-clean clean clean-py clean-ts clean-sdks clean-deps clean-repos clean-all clean-nuclear
 
 # Plain `make`
 .DEFAULT_GOAL := .
@@ -97,15 +97,15 @@ health: ## Workspace health (submodules + status)
 	@$(MAKE) sm-sync
 	@$(MAKE) status
 
-local-resources: check-packages ## Overlay Lab resource checkouts into both SDK installs
-	@chmod +x scripts/sdk-local-resources/overlay-python.sh scripts/sdk-local-resources/restore-python.sh
-	@scripts/sdk-local-resources/overlay-python.sh "$(CURDIR)/sdks/porto-sdk-python"
-	@node scripts/sdk-local-resources/link-typescript.mjs "$(CURDIR)/sdks/porto-sdk-typescript"
+lab: check-packages ## Overlay Lab resource checkouts into both SDK installs
+	@chmod +x scripts/lab/overlay-python.sh scripts/lab/restore-python.sh
+	@scripts/lab/overlay-python.sh "$(CURDIR)/sdks/porto-sdk-python"
+	@node scripts/lab/link-typescript.mjs "$(CURDIR)/sdks/porto-sdk-typescript"
 
-registry-resources: check-packages ## Restore registry porto-data / porto-features in both SDKs
-	@chmod +x scripts/sdk-local-resources/overlay-python.sh scripts/sdk-local-resources/restore-python.sh
-	@scripts/sdk-local-resources/restore-python.sh "$(CURDIR)/sdks/porto-sdk-python"
-	@node scripts/sdk-local-resources/unlink-typescript.mjs "$(CURDIR)/sdks/porto-sdk-typescript"
+registry: check-packages ## Restore registry porto-data / porto-features in both SDKs
+	@chmod +x scripts/lab/overlay-python.sh scripts/lab/restore-python.sh
+	@scripts/lab/restore-python.sh "$(CURDIR)/sdks/porto-sdk-python"
+	@node scripts/lab/unlink-typescript.mjs "$(CURDIR)/sdks/porto-sdk-typescript"
 	@$(MAKE) labs-verify
 
 # ============================================================================

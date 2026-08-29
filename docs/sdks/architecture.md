@@ -275,7 +275,7 @@ SDK consumes published `porto-data` and `porto-features` packages. No local Lab 
 
 **Two layers:** (1) **manifest semver** — version contract in `package.json` / `pyproject.toml`; (2) **runtime instance** — `data_path` / `PORTO_DATA_PATH` or installed package default. Auto-discovery when unset is dev/deploy convenience, not the primary integrator contract. Hub: [dependency.md](dependency.md).
 
-**Committed manifests:** `package.json`, `pyproject.toml`, and `pnpm-lock.yaml` use registry semver only. Lab development overlays installed packages from outside the SDK (Lab `make local-resources`) — never committed `file:` specs. Enforced by each SDK’s `make registry` (pre-commit, CI).
+**Committed manifests:** `package.json`, `pyproject.toml`, and `pnpm-lock.yaml` use registry semver only. Lab development overlays installed packages from outside the SDK (Lab `make lab`) — never committed `file:` specs. Enforced by each SDK’s `make registry` (pre-commit, CI).
 
 ---
 

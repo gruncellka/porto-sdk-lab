@@ -27,7 +27,7 @@ This repository is **orchestration tooling**, not a publishable SDK package.
 | Postal catalog JSON and schemas | `resources/porto-data` |
 | Behavioral Gherkin contracts | `resources/porto-features` |
 
-SDKs consume porto-data and porto-features via **published npm/pip packages** at runtime. Lab `resources/` submodules are for development and local overlay only (`make local-resources`).
+SDKs consume porto-data and porto-features via **published npm/pip packages** at runtime. Lab `resources/` submodules are for development overlays (`make lab` / `make registry`).
 
 ## Submodule topology
 

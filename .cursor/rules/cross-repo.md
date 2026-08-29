@@ -69,7 +69,7 @@ resources/porto-features ──────┤                              ├�
 ```
 
 - Resources do not depend on SDKs.
-- SDKs depend on **published** `porto-data` / `porto-features` packages (not on the sibling source folders, except via the explicit local-resources dev mode documented in `CONTRIBUTING.md`).
+- SDKs depend on **published** `porto-data` / `porto-features` packages (not on the sibling source folders, except via the explicit lab dev mode documented in `CONTRIBUTING.md`).
 - Product apps depend on **published** SDK packages.
 - Nothing in this Lab repo depends on a product app's source.
 
@@ -82,7 +82,7 @@ Committed SDK manifests must stay **registry-clean** — semver ranges only; no 
 - **Python SDK:** `pyproject.toml` — checked by `scripts/check_registry.py` (`make registry`).
 - **TypeScript SDK:** `package.json` + `pnpm-lock.yaml` — checked by `scripts/check_registry.py` (`make registry`).
 - **Lab orchestrator:** [`scripts/check_registry_deps.py`](../scripts/check_registry_deps.py) runs `make registry` in both SDK checkouts.
-- **Lab dev wiring:** Lab root `make local-resources` (venv editable installs + node_modules symlinks — never committed `file:` specs).
+- **Lab dev wiring:** Lab root `make lab` (venv editable installs + node_modules symlinks — never committed `file:` specs).
 - **Guards:** pre-commit hook `registry`, CI `validate` jobs, and publish smoke tests in both SDK repos.
 
 See [`docs/labs/resources.md`](../docs/labs/resources.md) and [`docs/sdks/dependency.md`](../docs/sdks/dependency.md).

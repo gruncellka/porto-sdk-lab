@@ -4,7 +4,7 @@ Lab is orchestration tooling for both SDKs and shared resources. It is not a pub
 
 - SDKs: `sdks/porto-sdk-python`, `sdks/porto-sdk-typescript`
 - Resources (Lab/dev overlays): `resources/porto-data`, `resources/porto-features`
-- Runtime SDKs consume **published** porto-data / porto-features (pip/npm). Root `resources/` is for Lab overlays only (`make local-resources`).
+- Runtime SDKs consume **published** porto-data / porto-features (pip/npm). Root `resources/` is for Lab overlays only (`make lab`).
 
 Public-surface comparison lives in [`surface/`](surface/) — see [docs/surface.md](docs/surface.md).
 
@@ -32,10 +32,11 @@ Lab frameworks track latest stable (FastAPI / Next.js / Node LTS). Core package 
 
 Before opening a PR: `make validate`.
 
-## Local resource overlays
+## Package mode (`lab` / `registry`)
 
 ```bash
-make local-resources                 # overlay Lab resource checkouts into both SDKs
+make lab                       # overlay Lab resource checkouts into both SDK installs
+make registry                  # restore published porto-data / porto-features
 python scripts/check_registry_deps.py  # manifests must stay registry-clean
 ```
 
@@ -126,7 +127,8 @@ Do not commit `labs/experiments/runs/`, `labs/experiments/latest`, or `labs/**/a
 | `make validate` | Required repository health |
 | `make sm-sync` | Align to Lab-pinned submodule commits |
 | `make sm-sync-remote` | Update pins to remote tips (intentional) |
-| `make local-resources` | Overlay Lab resource checkouts |
+| `make lab` | Overlay Lab `resources/*` into both SDK installs |
+| `make registry` | Restore published porto-data / porto-features in SDK installs |
 | `make labs-setup` | Setup labs in Docker |
 | `make lint` / `lint-py` / `lint-ts` | Pre-commit hygiene |
 | `make test-scripts` | Lab pytest |

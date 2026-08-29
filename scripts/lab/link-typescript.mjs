@@ -43,5 +43,5 @@ for (const { name, source } of LINKS) {
     console.log(`Linked ${name} -> ${source}`);
 }
 
-writeFileSync(join(sdkRoot, "node_modules", ".porto-local-resources"), "1\n");
-console.log("TypeScript SDK local resources linked (Lab-owned).");
+writeFileSync(join(sdkRoot, "node_modules", ".porto-lab"), "1\n");
+console.log("TypeScript SDK lab package mode linked (Lab-owned).");

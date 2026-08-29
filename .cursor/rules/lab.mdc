@@ -11,16 +11,16 @@ Coordination checkout for two SDK submodules plus `resources/porto-data` and `re
 
 ## Resource lock
 
-`make local-resources` (Lab root) overlays the **current git checkouts** into both SDKs from the outside:
+`make lab` (Lab root) overlays the **current git checkouts** into both **SDK** installs from the outside:
 
 - `resources/porto-data` (Lab: `b533125` / package **0.5.1**)
 - `resources/porto-features` (Lab: `03fba4a` / package **0.4.0**; includes letter-behavior Gherkin from `0d3ca53`+)
 
-Do not pin SDKs to published data `>=0.6.0`. Do not rebuild or edit porto-data / porto-features content for SDK alignment. Committed SDK manifests stay installable ranges (`>=0.5.1 <1.0.0` data, `>=0.4.0 <1.0.0` features). SDKs do not detect Lab topology.
+Do not pin SDKs to published data `>=0.6.0`. Do not rebuild or edit porto-data / porto-features content for SDK alignment. Committed SDK manifests stay installable ranges (`>=0.5.1 <1.0.0` data, `>=0.4.0 <1.0.0` features). SDKs do not detect Lab topology. Consumer apps are outside this repo — they own their own overlay commands if any.
 
 ## Heavy provider API
 
-Internetmarke stays fail-closed (`Unknown channel` without credentials). Do not run `make heavy`, `test-api`, or `labs-internetmarke-*` from ordinary validation CI. SDK `heavy.yml` (manual) and `publish.yml` (mandatory before publish) run heavy with `I_ACCEPT_PAID_API_COST=1` and operator secrets. Lab does not publish SDK packages. Lab overlays (`local-resources`) are Lab `make` only — never on validation or publish runners.
+Internetmarke stays fail-closed (`Unknown channel` without credentials). Do not run `make heavy`, `test-api`, or `labs-internetmarke-*` from ordinary validation CI. SDK `heavy.yml` (manual) and `publish.yml` (mandatory before publish) run heavy with `I_ACCEPT_PAID_API_COST=1` and operator secrets. Lab does not publish SDK packages. Package mode (`make lab` / `make registry`) is Lab `make` only — never on validation or publish runners.
 
 ## Quality gates
 

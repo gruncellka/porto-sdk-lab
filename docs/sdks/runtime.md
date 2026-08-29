@@ -4,7 +4,7 @@
 
 **Status:** Active — June 2026.
 
-**See also:** [api.md](api.md) (public contract), [dependency.md](dependency.md) (manifest vs config vs discovery), [architecture.md](architecture.md) §6 (data layer), Licko [`porto-sdk-integration.md`](../../../licko-app/docs/reference/porto-sdk-integration.md) (vend/sync).
+**See also:** [api.md](api.md) (public contract), [dependency.md](dependency.md) (manifest vs config vs discovery), [architecture.md](architecture.md) §6 (data layer).
 
 ---
 

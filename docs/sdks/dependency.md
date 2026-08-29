@@ -104,8 +104,8 @@ Lab co-locates `resources/porto-data` and `resources/porto-features` for cross-r
 
 | Tool | Effect |
 |------|--------|
-| Lab `make local-resources` | Overlay Lab resource checkouts into both SDK installs (venv editable / node_modules symlinks) — manifests unchanged |
-| Lab `make registry-resources` | Restore registry packages in both SDKs |
+| Lab `make lab` | Overlay Lab resource checkouts into both SDK installs (venv editable / node_modules symlinks) — manifests unchanged |
+| Lab `make registry` | Restore registry packages in both SDKs |
 | SDK `make registry` | Blocks committed local-source dependency specs |
 
 Prefer Lab overlays so the **pip/npm package** points at local data (same code path as production). Tests and runtime resolve the package — they do not walk Lab paths. `PORTO_DATA_PATH` / `PORTO_FEATURES_PATH` are explicit overrides only.

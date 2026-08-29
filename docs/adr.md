@@ -26,7 +26,7 @@ Porto SDK, porto-data, and porto-features ship as independent packages with thei
 
 **Porto SDK Lab** coordinates submodules and cross-repo verification. It may invoke SDK and resource commands, compare generated outputs, and run matrix sync at the ecosystem boundary.
 
-**Package repositories do not depend on Lab.** SDKs consume porto-data and porto-features via published npm/pip packages at runtime. Lab-only overlays (`make local-resources`) never run on SDK publish CI.
+**Package repositories do not depend on Lab.** SDKs consume porto-data and porto-features via published npm/pip packages at runtime. Lab-only overlays (`make lab`) never run on SDK publish CI.
 
 Dependency direction:
 

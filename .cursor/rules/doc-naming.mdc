@@ -4,7 +4,7 @@
 
 - **Always lowercase** file names.
 - **One word:** `dependency.md`, `config.md`, `debugging.md`, `resources.md`.
-- **Group with a subfolder** when topics share a prefix — do not use multi-word filenames (`docs/labs/resources.md`, not `local-resources.md`).
+- **Group with a subfolder** when topics share a prefix — do not use multi-word filenames (`docs/labs/resources.md`, not `lab-resources.md`).
 - **No `SCREAMING_SNAKE_CASE`** or `PascalCase` in doc file names.
 
 ## Exceptions (repo conventions)
