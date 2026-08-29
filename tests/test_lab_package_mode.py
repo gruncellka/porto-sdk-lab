@@ -13,7 +13,9 @@ SCRIPTS_LAB = LAB_ROOT / "scripts" / "lab"
 MAKEFILE = LAB_ROOT / "Makefile"
 
 
-def _run(cmd: list[str], *, env: dict[str, str] | None = None, cwd: Path | None = None) -> subprocess.CompletedProcess[str]:
+def _run(
+    cmd: list[str], *, env: dict[str, str] | None = None, cwd: Path | None = None
+) -> subprocess.CompletedProcess[str]:
     merged = os.environ.copy()
     if env:
         merged.update(env)
