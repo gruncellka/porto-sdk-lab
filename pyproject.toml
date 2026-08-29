@@ -1,6 +1,6 @@
 [project]
 name = "porto-sdk-lab"
-version = "0.0.0"
+version = "0.1.0"
 description = "Orchestration workspace for Porto SDK ecosystem development and cross-repo verification"
 license = {text = "Apache-2.0"}
 authors = [{name = "Oleksandr Tsyba"}]
