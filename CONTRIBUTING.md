@@ -100,6 +100,8 @@ git config url."git@github.com:".insteadOf "https://github.com/"
 
 Root hooks exclude `resources/` and `sdks/`. A root guard blocks accidental submodule pointer commits; set `ALLOW_SUBMODULE_POINTER_COMMIT=1` for intentional pointer updates after submodule pushes.
 
+Subject prefer ≤50 characters, hard max 72. Optional body after a blank line, wrap at 72. `.githooks/commit-msg` rejects a subject or body line over 72, a body that does not follow a blank line, and a trailing period. Re-run `make install-hooks` once so an existing clone picks up that hook.
+
 ## CI
 
 Push-based workflow [`.github/workflows/validation.yml`](.github/workflows/validation.yml):

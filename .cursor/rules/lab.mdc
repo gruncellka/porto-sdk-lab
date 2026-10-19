@@ -33,3 +33,5 @@ Do not revive `porto-sdk-contract` or a handbook renderer as a product. `surface
 ## Commit boundaries
 
 Edit and commit Lab files here (`labs/`, `scripts/`, `tests/`, `docs/`, `surface/`, `.github/`, `.cursor/`, root config). SDK and resource file changes belong in those submodules. See [safe-edits.md](safe-edits.md) and [cross-repo.md](cross-repo.md).
+
+Subject prefer ≤50 characters, hard max 72. Body after a blank line, wrap at 72. `.githooks/commit-msg` rejects a subject or body line over 72, a body that does not follow a blank line, and a trailing period.

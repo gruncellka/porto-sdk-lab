@@ -5,9 +5,19 @@
 
 exclude: ^(resources|sdks)/
 
+default_install_hook_types: [pre-commit, commit-msg]
+
 repos:
     - repo: local
       hooks:
+          - id: commit-msg-length
+            name: commit message length
+            entry: .githooks/commit-msg
+            language: system
+            pass_filenames: true
+            always_run: true
+            stages: [commit-msg]
+
           - id: guard-submodule-pointer-commit
             name: Guard accidental submodule ref commit
             entry: bash -c '. venv/bin/activate 2>/dev/null || true && python3 scripts/hooks/guard_submodule_refs.py'
