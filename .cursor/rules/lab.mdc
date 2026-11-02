@@ -30,6 +30,8 @@ Public SDK façade (TS is SoT): ProviderClient `resolve` / `options` / `estimate
 
 Do not revive `porto-sdk-contract` or a handbook renderer as a product. `surface/` is an internal drift/parity tool only: `contract/` expect (YAML), `extract/` observe, `artifacts/` generated JSON-first (`python.json` / `typescript.json` / `report.json`; optional `report.md` view).
 
+Tracking parity includes normalized status values, event/snapshot fields, missing-value semantics, provider chronology, and stable event identity. Carrier times preserve explicit offsets or zoneless local semantics; neither SDK may infer a timezone or substitute poll time.
+
 ## Commit boundaries
 
 Edit and commit Lab files here (`labs/`, `scripts/`, `tests/`, `docs/`, `surface/`, `.github/`, `.cursor/`, root config). SDK and resource file changes belong in those submodules. See [safe-edits.md](safe-edits.md) and [cross-repo.md](cross-repo.md).
