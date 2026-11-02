@@ -77,6 +77,28 @@ def test_parse_typedoc_keeps_uppercase_enum_values():
     assert enum["enum_members"]["PORTO_DATA_NOT_FOUND"] == "PORTO_DATA_NOT_FOUND"
 
 
+def test_parse_typedoc_reads_enum_literal_type_values():
+    data = {
+        "kind": 1,
+        "name": "fixture",
+        "children": [
+            {
+                "kind": 8,
+                "name": "PortoStatus",
+                "children": [
+                    {
+                        "kind": 16,
+                        "name": "DELIVERED",
+                        "type": {"type": "literal", "value": "delivered"},
+                    }
+                ],
+            }
+        ],
+    }
+    surface = parse_typedoc_json(data)
+    assert surface["symbols"]["PortoStatus"]["enum_members"]["DELIVERED"] == "delivered"
+
+
 def test_parse_typedoc_keeps_null_union_and_array_element_types():
     data = {
         "kind": 1,

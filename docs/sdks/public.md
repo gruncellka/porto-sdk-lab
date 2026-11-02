@@ -79,6 +79,25 @@ Vocabulary: `ServiceKind`, `FeatureKind`, `Requirement`, `MarkType`, `TrackingMo
 
 Errors: `PortoError`, `PortoErrorCode`
 
+Carrier status: `PortoStatus` (deprecated alias `TrackingState` through 0.2.x). `TrackingStatus` is the poll snapshot. `status` is null when a native code is unmapped — there is no `UNKNOWN` member, and unknown codes are not coerced to `transit`. `PortoStatus` is carrier lifecycle, not proof that a mark was purchased.
+
+Tracking time: `TrackingEvent.occurredAt` / `occurred_at` preserves the carrier-reported date-time and is absent when the carrier did not provide a valid date-time. `occurredKind` / `occurred_kind` is `offset` when the carrier included an offset and `local` when it sent a zoneless civil time. The SDK never infers a timezone. `receivedAt` / `received_at` and `pollReceivedAt` / `poll_received_at` are SDK observation times and never substitute for carrier time. Snapshot `lastUpdate` / `last_update` is the latest carrier event time in provider chronology; `statusChangedAt` / `status_changed_at` is when the current normalized `PortoStatus` run began. Both are optional.
+
+`providerRaw` / `provider_raw` on `PortoMark` and `TrackingStatus` is opaque sanitized provider data. Its internal shape is not part of Porto compatibility guarantees. Secrets are dropped before the value is stored. Consumers must not depend on the raw shape.
+
+Tracking is a separate wire from mark execution. Deutsche Post live `track.get` runs only when the `shipment` wire has an explicit base URL. `internetmarke` stays unsupported for tracking. Other providers stay stubbed. An empty or missing wire is not an alias for live Deutsche Post shipment tracking.
+
+Native codes map to `PortoStatus` inside each provider adapter. The live HTTP adapter is Deutsche Post shipment only.
+
+| PortoStatus | Deutsche Post | Swiss Post | La Poste | Ukrposhta |
+|---|---|---|---|---|
+| `created` | `pre-transit` | `NOT_YET_SENT` | `PC1` | `101` |
+| `transit` | `transit` | `ON_THE_WAY` | `PC2` | `102` |
+| `delivery` | `out-for-delivery` | `OUT_FOR_DELIVERY` | `PC3` | `103` |
+| `delivered` | `delivered` | `DELIVERED` | `LIV` | `104` |
+| `returned` | `return` | `RETURNED` | `REN` | `105` |
+| `undeliverable` | `failure` | `NOT_DELIVERED` | `NDR` | `106` |
+
 Configuration: `PortoConfig`, `CacheConfig`, `TransportConfig`, `WireConfig`, `ProviderRuntimeConfig`
 
 `client.config` is input `PortoConfig`, not a normalized runtime object. `PortoResolver`, `PortoExecution`, `EnvelopeResolverService`, `NormalizedPortoConfig`, and `HttpClient` are not public types.
