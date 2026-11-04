@@ -85,9 +85,9 @@ Tracking time: `TrackingEvent.occurredAt` / `occurred_at` preserves the carrier-
 
 `providerRaw` / `provider_raw` on `PortoMark` and `TrackingStatus` is opaque sanitized provider data. Its internal shape is not part of Porto compatibility guarantees. Secrets are dropped before the value is stored. Consumers must not depend on the raw shape.
 
-Tracking is a separate wire from mark execution. Deutsche Post live `track.get` runs only when the `shipment` wire has an explicit base URL. The public tracking kind is `label` or `stamp` (porto-data `mark_type`), not the wire id. `internetmarke` stays unsupported for tracking. Other providers stay stubbed. An empty or missing wire is not an alias for live Deutsche Post label tracking.
+Tracking is a separate wire from mark execution. Deutsche Post live `track.get` runs only when the `shipment` wire has an explicit base URL. There is no public tracking kind. A mark is polled when it has a tracking number. The `internetmarke` wire does not poll; that is a wire limit. Other providers stay stubbed. An empty or missing wire is not an alias for live Deutsche Post tracking.
 
-Native codes map to `PortoStatus` inside each provider adapter. The live HTTP adapter is Deutsche Post label tracking only.
+Native codes map to `PortoStatus` inside each provider adapter. The live HTTP adapter is Deutsche Post shipment tracking only. An addressed Internetmarke can still carry a tracking number without Einschreiben, and those events use the same `PortoStatus` values.
 
 | PortoStatus | Deutsche Post | Swiss Post | La Poste | Ukrposhta |
 |---|---|---|---|---|
@@ -115,7 +115,7 @@ Public restrictions operations: `check` on `client.restrictions` and `provider.r
 
 ProviderClient verbs: `resolve` / `options` / `price` / `mark` / `track` / `capabilities` / `can` / `wallet`. Not public: `estimate`, `registered`, `resolver`, `advise`, `prepare`, `bytes`.
 
-`ProviderCapabilities` is facts only: `mark`, `track`, `wallet`, `trackingKind`.
+`ProviderCapabilities` is facts only: `mark`, `track`, `wallet`.
 
 ## Kind vs purchasable options
 

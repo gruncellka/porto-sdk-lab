@@ -146,7 +146,6 @@ allowlist_by_symbol:
     - mark
     - track
     - wallet
-    - trackingKind
   PortoConfig:
     - providers
     - data
