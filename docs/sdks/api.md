@@ -58,7 +58,7 @@ Apps call **`PortoClient` catalogs** and **`client.provider(id)` → `ProviderCl
 | `resolve` | Intent → frozen `Porto` |
 | `price` | Same selection → catalog `Pricing` (optional; not execution identity) |
 | `mark` | `PortoMarkRequest` → `PortoMark` (one or many) |
-| `track` | Tracking when capability allows |
+| `track` | Tracking when a tracking wire is configured (`track.get`) |
 | `capabilities` / `can` | Feature / execution gates (`FeatureKind` for `can`) |
 | `wallet` | Prepaid balance read when supported |
 

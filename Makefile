@@ -47,7 +47,7 @@ help: ## Show available commands grouped by action
 	@grep -E '^(parity-report|check-paid-ci-safety|promote-evidence):.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-30s\033[0m %s\n", $$1, $$2}'
 	@echo ""
 	@echo "✅ Validate:"
-	@grep -E '^(validate|check-gitignore):.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-25s\033[0m %s\n", $$1, $$2}'
+	@grep -E '^(validate|check-gitignore|naming):.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-25s\033[0m %s\n", $$1, $$2}'
 	@echo ""
 	@echo "🩺 Health:"
 	@grep -E '^(status|health):.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-25s\033[0m %s\n", $$1, $$2}'
@@ -334,7 +334,13 @@ check-gitignore: ## Fail if generated paths are tracked in git
 	fi
 	@venv/bin/python scripts/check_gitignore.py
 
-validate: check-gitignore lint lint-py lint-ts test-scripts matrix-sync-check check-paid-ci-safety surface-check ## Required repository health (all leaf checks)
+naming: ## Flag 4+ word names and filenames that repeat their directory
+	@if [ -x ".venv/bin/python" ]; then PY=".venv/bin/python"; \
+	elif [ -x "venv/bin/python" ]; then PY="venv/bin/python"; \
+	else echo "Error: Workspace venv not found. Run 'make' first."; exit 1; fi; \
+	$$PY scripts/naming.py
+
+validate: check-gitignore naming lint lint-py lint-ts test-scripts matrix-sync-check check-paid-ci-safety surface-check ## Required repository health (all leaf checks)
 
 # ============================================================================
 # Linting

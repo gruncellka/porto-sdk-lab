@@ -120,3 +120,11 @@ If a PR adds mark download / normalization (`fetch_mark_bytes`, `fetchMarkBytes`
 - Add a non-blocking Bug titled `Mark geometry hardcoded instead of catalog calibrations`.
 - Body: `Measured checkout sizes belong in porto-data marks.calibrations; SDK/labs should load calibration facts from bundled porto-data, not duplicate mm/px tables in code.`
 - Apply labels `maintainability`, `consistency`.
+
+### 11) Tracking contract must stay equal across SDKs (blocking)
+
+If tracking status, event time, ordering, or event identity changes in one SDK without the equivalent Python/TypeScript contract and parity coverage:
+
+- Add a blocking Bug titled `Cross-SDK tracking contract drift`.
+- Body: `Keep status values, event/snapshot fields, missing-value semantics, provider chronology, and stable event identity equal after snake/camel case folding. Carrier times must not infer a timezone or use poll time.`
+- Apply labels `integration`, `compatibility`, `correctness`.

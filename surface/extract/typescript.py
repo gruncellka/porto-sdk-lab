@@ -178,7 +178,8 @@ def _serialize_enum(node: dict[str, Any]) -> dict[str, Any]:
         if val is not None:
             text = str(val).strip().strip('"').strip("'")
         else:
-            text = mname
+            literal = _type_name(child.get("type"))
+            text = literal.strip('"').strip("'") if literal else mname
         enum_members[mname] = text
     return {
         "kind": "enum",

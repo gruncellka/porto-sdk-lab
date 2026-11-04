@@ -14,9 +14,9 @@ Coordination checkout for two SDK submodules plus `resources/porto-data` and `re
 `make lab` (Lab root) overlays the **current git checkouts** into both **SDK** installs from the outside:
 
 - `resources/porto-data` (Lab: `b533125` / package **0.5.1**)
-- `resources/porto-features` (Lab: `03fba4a` / package **0.4.0**; includes letter-behavior Gherkin from `0d3ca53`+)
+- `resources/porto-features` (Lab: `44eb36b` / package **0.5.0**; statuses catalog is on this pin, not yet in the published package)
 
-Do not pin SDKs to published data `>=0.6.0`. Do not rebuild or edit porto-data / porto-features content for SDK alignment. Committed SDK manifests stay installable ranges (`>=0.5.1 <1.0.0` data, `>=0.4.0 <1.0.0` features). SDKs do not detect Lab topology. Consumer apps are outside this repo — they own their own overlay commands if any.
+Do not pin SDKs to published data `>=0.6.0`. Do not rebuild or edit porto-data / porto-features content for SDK alignment. Committed SDK manifests stay installable ranges (`>=0.5.1 <1.0.0` data, `>=0.5.0 <1.0.0` features). SDKs do not detect Lab topology. Consumer apps are outside this repo — they own their own overlay commands if any.
 
 ## Heavy provider API
 
@@ -29,6 +29,8 @@ SDK local gate: `make check` then `make sdk` then `make adapters` (or `make vali
 Public SDK façade (TS is SoT): ProviderClient `resolve` / `options` / `estimate` / `price` / `mark` / `track` / `capabilities` / `can` / `wallet`; envelopes `list` / `geometry` / `layout` / `identify` / `getMark`.
 
 Do not revive `porto-sdk-contract` or a handbook renderer as a product. `surface/` is an internal drift/parity tool only: `contract/` expect (YAML), `extract/` observe, `artifacts/` generated JSON-first (`python.json` / `typescript.json` / `report.json`; optional `report.md` view).
+
+Tracking parity includes normalized status values, event/snapshot fields, missing-value semantics, provider chronology, and stable event identity. Carrier times preserve explicit offsets or zoneless local semantics; neither SDK may infer a timezone or substitute poll time.
 
 ## Commit boundaries
 

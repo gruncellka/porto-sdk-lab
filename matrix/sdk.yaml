@@ -405,6 +405,16 @@ sdk_cells:
     refs:
       - sdk/core/restrictions.feature:Scenario:Cyprus destination-side handling at mixed district
 
+  - cell_id: global.status.metadata.null.null
+    provider: global
+    concern: status
+    slice: metadata
+    product_id: null
+    zone: null
+    status: required
+    refs:
+      - sdk/core/status.feature:Scenario:created is declared in the PortoStatus catalog
+
   - cell_id: global.validation.happy.null.null
     provider: global
     concern: validation

@@ -45,7 +45,7 @@ Unit layer (public API, mirrors core BDD):
 - TypeScript: `tests/resolution/public_contract.test.ts`, `quote.test.ts`, `restrictions_surface.test.ts`
 ---
 
-Generated at `2026-08-26T21:29:43Z` by `scripts/parity-report.py`.
+Generated at `2026-11-04T10:22:34Z` by `scripts/parity-report.py`.
 
 Compares porto-features `@sdk` scenario steps against Python pytest-bdd
 and TypeScript Cucumber step definitions in both SDK repos.
@@ -55,9 +55,9 @@ above is the semantic contract for the freeze.
 
 ## Summary
 
-- Features scanned: **21**
-- Unique steps: **137**
-- Covered in both SDKs: **137**
+- Features scanned: **22**
+- Unique steps: **142**
+- Covered in both SDKs: **142**
 - Python only: **0**
 - TypeScript only: **0**
 - Missing in both SDKs: **0**
@@ -96,7 +96,7 @@ above is the semantic contract for the freeze.
 ### `core/data.feature`
 
 - `And I have a Porto SDK client initialized` — Py: **yes**, TS: **yes**
-- `And each envelope should have field "height_mm"` — Py: **yes**, TS: **yes**
+- `And each envelope should have field "height"` — Py: **yes**, TS: **yes**
 - `And each envelope should have field "id"` — Py: **yes**, TS: **yes**
 - `And each envelope should have field "width"` — Py: **yes**, TS: **yes**
 - `And providers should include provider "deutschepost"` — Py: **yes**, TS: **yes**
@@ -113,9 +113,11 @@ above is the semantic contract for the freeze.
 - `Then I should get a non-empty list of product options` — Py: **yes**, TS: **yes**
 - `Then I should get an array of envelopes` — Py: **yes**, TS: **yes**
 - `Then I should get providers information` — Py: **yes**, TS: **yes**
+- `Then the country code 3 should be "<country_code_3>"` — Py: **yes**, TS: **yes**
 - `When I inspect envelopes data` — Py: **yes**, TS: **yes**
 - `When I inspect the provider registry` — Py: **yes**, TS: **yes**
 - `When I list product options` — Py: **yes**, TS: **yes**
+- `When I look up country code 3 for "<country_code>"` — Py: **yes**, TS: **yes**
 
 ### `core/errors.feature`
 
@@ -214,36 +216,41 @@ above is the semantic contract for the freeze.
 - `And destination region code is "UA-43"` — Py: **yes**, TS: **yes**
 - `And destination region code is "UA-65"` — Py: **yes**, TS: **yes**
 - `And the letter weight is 20 grams` — Py: **yes**, TS: **yes**
-- `And the resolved Porto restrictions should have no impact` — Py: **yes**, TS: **yes**
 - `And the resolved Porto restrictions list should be empty` — Py: **yes**, TS: **yes**
+- `And the resolved Porto restrictions should have no impact` — Py: **yes**, TS: **yes**
 - `And the resolved Porto restrictions should match standalone restriction lookup` — Py: **yes**, TS: **yes**
 - `And the resolved Porto should include a restrictions result` — Py: **yes**, TS: **yes**
 - `And the restriction result impact should be "warn"` — Py: **yes**, TS: **yes**
-- `And the restriction result impact should be "block"` — Py: **yes**, TS: **yes**
-- `And the restriction result impact should be null` — Py: **yes**, TS: **yes**
-- `And the restriction result list should be empty` — Py: **yes**, TS: **yes**
-- `And the restriction result should include legal region "UA-14"` — Py: **yes**, TS: **yes**
-- `And the restriction result should include legal region "UA-43"` — Py: **yes**, TS: **yes**
-- `And the restriction result should include legal region "UA-65"` — Py: **yes**, TS: **yes**
-- `And the restriction result should not include legal region "UA-43"` — Py: **yes**, TS: **yes**
-- `And the restriction result legal region "UA-65" should be partial` — Py: **yes**, TS: **yes**
-- `And the restriction result legal jurisdictions should include "eur-lex.europa.eu"` — Py: **yes**, TS: **yes**
-- `And the restriction result legal jurisdictions should include "seco.admin.ch"` — Py: **yes**, TS: **yes**
-- `And the restriction result legal jurisdictions should include "zakon.rada.gov.ua"` — Py: **yes**, TS: **yes**
 - `And the restriction result legal jurisdictions should not include "eur-lex.europa.eu"` — Py: **yes**, TS: **yes**
 - `And the restriction result legal jurisdictions should not include "seco.admin.ch"` — Py: **yes**, TS: **yes**
 - `And the restriction result legal jurisdictions should not include "zakon.rada.gov.ua"` — Py: **yes**, TS: **yes**
-- `And the restriction result should include routing region "CY-01"` — Py: **yes**, TS: **yes**
-- `And the restriction result routing region "CY-01" should be partial` — Py: **yes**, TS: **yes**
+- `And the restriction result legal region "UA-65" should be partial` — Py: **yes**, TS: **yes**
+- `And the restriction result list should be empty` — Py: **yes**, TS: **yes**
 - `And the restriction result routing authority should be "CY"` — Py: **yes**, TS: **yes**
+- `And the restriction result routing region "CY-01" should be partial` — Py: **yes**, TS: **yes**
+- `And the restriction result should include legal region "UA-14"` — Py: **yes**, TS: **yes**
+- `And the restriction result should include legal region "UA-43"` — Py: **yes**, TS: **yes**
+- `And the restriction result should include legal region "UA-65"` — Py: **yes**, TS: **yes**
+- `And the restriction result should include routing region "CY-01"` — Py: **yes**, TS: **yes**
+- `And the restriction result should not include legal region "UA-43"` — Py: **yes**, TS: **yes**
 - `Given I have a Porto SDK client initialized` — Py: **yes**, TS: **yes**
 - `Given provider is "<provider>"` — Py: **yes**, TS: **yes**
 - `Given provider is "deutschepost"` — Py: **yes**, TS: **yes**
 - `Given provider is "swisspost"` — Py: **yes**, TS: **yes**
 - `Given provider is "ukrposhta"` — Py: **yes**, TS: **yes**
 - `Then the resolution should be valid` — Py: **yes**, TS: **yes**
+- `Then the restriction result impact should be "block"` — Py: **yes**, TS: **yes**
+- `Then the restriction result impact should be "warn"` — Py: **yes**, TS: **yes**
+- `Then the restriction result impact should be null` — Py: **yes**, TS: **yes**
+- `Then the restriction result legal jurisdictions should include "eur-lex.europa.eu"` — Py: **yes**, TS: **yes**
+- `Then the restriction result legal jurisdictions should include "seco.admin.ch"` — Py: **yes**, TS: **yes**
+- `Then the restriction result legal jurisdictions should include "zakon.rada.gov.ua"` — Py: **yes**, TS: **yes**
 - `When I check destination restrictions` — Py: **yes**, TS: **yes**
 - `When I resolve the letter` — Py: **yes**, TS: **yes**
+
+### `core/status.feature`
+
+- `Then "created" should be declared in the PortoStatus catalog` — Py: **yes**, TS: **yes**
 
 ### `core/validation.feature`
 
@@ -409,21 +416,26 @@ above is the semantic contract for the freeze.
 - `And each available service should have field "id"` — Py: **yes**, TS: **yes**
 - `And each available service should have field "kind"` — Py: **yes**, TS: **yes**
 - `And product id is "standardbrief"` — Py: **yes**, TS: **yes**
+- `And product option "standardbrief" should include service "einschreiben"` — Py: **yes**, TS: **yes**
 - `And service ids are "einschreiben"` — Py: **yes**, TS: **yes**
 - `And service ids are "einschreiben,einschreiben_einwurf"` — Py: **yes**, TS: **yes**
 - `And service kind is "registered"` — Py: **yes**, TS: **yes**
 - `And service kind is "registered_return_receipt"` — Py: **yes**, TS: **yes**
 - `And the letter weight is 20 grams` — Py: **yes**, TS: **yes**
 - `And the resolved Porto should include service id "einschreiben"` — Py: **yes**, TS: **yes**
+- `And the resolved Porto should include service kind "registered"` — Py: **yes**, TS: **yes**
 - `And the resolved Porto should include service kind "registered_return_receipt"` — Py: **yes**, TS: **yes**
 - `And the resolved amount should be greater than the product component amount` — Py: **yes**, TS: **yes**
 - `Given I want to send a letter to country "DE"` — Py: **yes**, TS: **yes**
 - `Given provider is "deutschepost"` — Py: **yes**, TS: **yes**
 - `Then available services should include "einschreiben"` — Py: **yes**, TS: **yes**
+- `Then product options should include "standardbrief"` — Py: **yes**, TS: **yes**
 - `Then the resolution should be invalid` — Py: **yes**, TS: **yes**
 - `Then the resolution should be valid` — Py: **yes**, TS: **yes**
 - `Then the resolved Porto should include service id "einschreiben_rueckschein"` — Py: **yes**, TS: **yes**
+- `When I list product options` — Py: **yes**, TS: **yes**
 - `When I resolve the letter` — Py: **yes**, TS: **yes**
+- `When I resolve using product "standardbrief" and discovered service "einschreiben"` — Py: **yes**, TS: **yes**
 
 ### `providers/laposte/cli.feature`
 
@@ -483,6 +495,7 @@ above is the semantic contract for the freeze.
 - `And I have a Porto SDK client initialized` — Py: **yes**, TS: **yes**
 - `And I have access to porto-data` — Py: **yes**, TS: **yes**
 - `And I should get zone with id "domestic"` — Py: **yes**, TS: **yes**
+- `And delivery preference is "cheapest"` — Py: **yes**, TS: **yes**
 - `And delivery preference is "fastest"` — Py: **yes**, TS: **yes**
 - `And product id is "lettre_verte"` — Py: **yes**, TS: **yes**
 - `And the letter weight is 20 grams` — Py: **yes**, TS: **yes**
@@ -541,11 +554,14 @@ above is the semantic contract for the freeze.
 - `And I have access to porto-data` — Py: **yes**, TS: **yes**
 - `And I should get weight tier "W0020"` — Py: **yes**, TS: **yes**
 - `And I should get zone with id "domestic"` — Py: **yes**, TS: **yes**
+- `And delivery preference is "economy"` — Py: **yes**, TS: **yes**
+- `And delivery preference is "fastest"` — Py: **yes**, TS: **yes**
 - `And the letter weight is 20 grams` — Py: **yes**, TS: **yes**
 - `And the resolution should be valid` — Py: **yes**, TS: **yes**
 - `Given I want to send a letter to country "CH"` — Py: **yes**, TS: **yes**
 - `Given provider is "swisspost"` — Py: **yes**, TS: **yes**
 - `Then I should get product with id "a_post_standardbrief"` — Py: **yes**, TS: **yes**
+- `Then I should get product with id "b_post_standardbrief"` — Py: **yes**, TS: **yes**
 - `When I resolve the letter` — Py: **yes**, TS: **yes**
 
 ### `providers/ukrposhta/cli.feature`

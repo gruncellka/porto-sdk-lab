@@ -56,6 +56,10 @@ allowlist_symbols:
   - ProviderRuntimeConfig
   - ExecutionParameters
   - EnvelopeIdentity
+  - OccurredKind
+  - PortoStatus
+  - TrackingEvent
+  - TrackingState
   - TrackingStatus
   - Balance
   - ProviderCapabilities
@@ -142,7 +146,6 @@ allowlist_by_symbol:
     - mark
     - track
     - wallet
-    - trackingKind
   PortoConfig:
     - providers
     - data
@@ -168,6 +171,8 @@ baggy_allowed:
   - PortoError.details
   - PortoError.providerError
   - PortoError.provider_error
+  - PortoMark.providerRaw
+  - TrackingStatus.providerRaw
 
 # Nested types referenced from allowlisted symbols (not root exports).
 closure_allow:
@@ -191,8 +196,6 @@ closure_allow:
   - AddressResolver
   - JurisdictionsService
   - ProvidersService
-  - TrackingState
-  - TrackingEvent
   - ProviderId
   - WireId
   - Seconds
