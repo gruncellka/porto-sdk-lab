@@ -2,7 +2,7 @@
 
 [Unreleased]
 
-## 0.2.0
+## 0.2.0 - 2026-11-04
 
 ### Added
 
@@ -15,6 +15,6 @@
 - `ProviderCapabilities` is `mark`, `track`, and `wallet`.
 - Deutsche Post live tracking is the `shipment` wire with a base URL. Internetmarke does not poll.
 
-## 0.1.0
+## 0.1.0 - 2026-08-29
 
 Initial release
