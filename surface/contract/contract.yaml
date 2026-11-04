@@ -44,6 +44,7 @@ allowlist_symbols:
   - WorkingDaysHint
   - ServiceKind
   - FeatureKind
+  - PROOF_FEATURE_KINDS
   - Requirement
   - MarkType
   - TrackingMode

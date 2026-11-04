@@ -855,6 +855,16 @@ sdk_cells:
     refs:
       - sdk/providers/deutschepost/services.feature:Scenario:Incompatible registered variants fail closed
 
+  - cell_id: deutschepost.services.service_variant.standardbrief.domestic.purchased_services_expose_their_
+    provider: deutschepost
+    concern: services
+    slice: service_variant
+    product_id: standardbrief
+    zone: domestic
+    status: required
+    refs:
+      - sdk/providers/deutschepost/services.feature:Scenario:Purchased services expose their feature kinds
+
   - cell_id: laposte.cli.metadata.null.null
     provider: laposte
     concern: cli

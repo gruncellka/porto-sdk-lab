@@ -146,13 +146,13 @@ No address on resolution.
 
 ## `Porto` (resolved identity)
 
-Must carry: product, zone, weight tier, `amount`, `currency`, `components` (`PriceComponent[]`: `kind` `product` | `service`, catalog `id`, `amount` in the same cents as the parent), `features` (`Feature[]`), `available_services` / `availableServices` (`Service[]` options), `services` (selected `ServiceKind[]`), bound chosen catalog service ids for execution (`service_ids` / `serviceIds`), `requires` (`Requirement` tokens), `mark_type` / `markType` (`stamp` | `label`), tracking (`none` | `optional` | `included`), validity/warnings, `restrictions` (`Restrictions`: `impact` + `legal[]` + `routing[]`), delivery hint (`DeliveryHint`).
+Must carry: product, zone, weight tier, `amount`, `currency`, `components` (`PriceComponent[]`: `kind` `product` | `service`, catalog `id`, `amount` in the same cents as the parent), `features` (`Feature[]`), `available_services` / `availableServices` (`Service[]` options), `services` (selected `ServiceKind[]`), bound chosen catalog service ids for execution (`service_ids` / `serviceIds`), purchased feature kinds (`feature_kinds` / `featureKinds`, empty when no service was bought), `requires` (`Requirement` tokens), `mark_type` / `markType` (`stamp` | `label`), tracking (`none` | `optional` | `included`), validity/warnings, `restrictions` (`Restrictions`: `impact` + `legal[]` + `routing[]`), delivery hint (`DeliveryHint`).
 
 Not public on `Porto`: `dimension_specs` / `dimensionSpecs`, `wire`, `base_price` / `basePrice`, `pricing`. Loader `PortoPricing.price` stays internal. Indemnity `max_amount` is an insurance cap, not postage.
 
 `amount` is the authoritative composed quote in catalog cents (product grid row plus every bound service). After a successful compose, `components` is complete and `sum(component.amount) == amount`. A bound/requested service with no `service_prices` row fails `resolve` / `price` with `PORTO_PRICE_NOT_FOUND` (`service_id` in details) — no Porto, no partial `amount`. Catalog `amount: 0` is explicit no extra charge and appears in `components`. `price()` returns `Pricing` with the same `amount` / `currency` / `components` for the same selection; it is not required after `resolve()`.
 
-Product options list catalog facts (`id`, row `amount`, `delivery_hint`, indemnity, tracking) plus priced add-ons in `services` / `ServiceOption[]` for that product × the destination zone used by `options()`. Each `ServiceOption` carries catalog `id` (pin value), `kind`, `name`, optional `label`, zone tariff `amount`, `currency`, and optional `combinable_with` / `combinableWith`. Discovery rows may expose a missing option price as null; binding that id in `resolve` / `price` fails. Do not attach `components` to options. `service_ids` / `serviceIds` on resolve remain catalog pins from discovery — do not invent them. The SDK does not infer a `speed` / `coverage` differentiator from those facts.
+Product options list catalog facts (`id`, row `amount`, `delivery_hint`, indemnity, tracking) plus priced add-ons in `services` / `ServiceOption[]` for that product × the destination zone used by `options()`. Each `ServiceOption` carries catalog `id` (pin value), `kind`, `name`, optional `label`, zone tariff `amount`, `currency`, optional `combinable_with` / `combinableWith`, and `feature_kinds` / `featureKinds`. Discovery rows may expose a missing option price as null; binding that id in `resolve` / `price` fails. Do not attach `components` to options. `service_ids` / `serviceIds` on resolve remain catalog pins from discovery — do not invent them. The SDK does not infer a `speed` / `coverage` differentiator from those facts.
 
 `mark_type` is copied from the **resolved** `marks.profiles[].type`, not from `products.json` `mark_type`.
 
@@ -258,13 +258,13 @@ No `restricted_areas`. No aliases (`get_layout` / `getLayout`, `get_geometry` / 
 
 ## `PortoMark` public fields
 
-`id`, `content`, `content_type` / `contentType` (`MarkOutputMime`), `amount`, `currency`, `generated_at` / `generatedAt`, `external_id` / `externalId`, `tracking_number` / `trackingNumber`, `provider`, `wire`
+`id`, `content`, `content_type` / `contentType` (`MarkOutputMime`), `amount`, `currency`, `generated_at` / `generatedAt`, `external_id` / `externalId`, `tracking_number` / `trackingNumber`, `provider`, `wire`, `feature_kinds` / `featureKinds`
 
 Not public on `PortoMark`: `provider_raw`, `pre_calculated_price`, `price_difference`, `price_mismatch`, `mark_profile_id` (adapter/internal only).
 
 ## Root exports
 
-Allowed families: `PortoClient` / `ProviderClient`, config types, resolution + mark types, `PriceComponent`, envelope identify results (`Match` variants), vocabulary, errors.
+Allowed families: `PortoClient` / `ProviderClient`, config types, resolution + mark types, `PriceComponent`, envelope identify results (`Match` variants), vocabulary, errors. `PROOF_FEATURE_KINDS` is the proof subset: `acceptance_proof`, `recipient_signature`, `return_receipt`, `delivery_proof`. `tracking` is not in that set.
 
 Not root-exported: `DEFAULT_PROVIDER`, `PortoResolver`, `PortoExecution`, `EnvelopeResolverService`, `RestrictionsService`, `NormalizedPortoConfig`, `HttpClient`, `loadPortoConfigFromEnv`, `MarkRequest`, `MarkExecution`, `prepare`, `execute`, adapter REST schemas, `voucherLayout`, `FRANKING_ZONE`, `ADDRESS_ZONE`.
 
@@ -306,6 +306,7 @@ One canonical name per concept. Python snake_case / TypeScript camelCase only.
 | Catalog service possibilities | services catalog | `Porto.available_services` (`Service[]`) | `Porto.availableServices` (`Service[]`) |
 | Requested service grouping | — | `ResolutionRequest.services` | `ResolutionRequest.services` |
 | Chosen service option | catalog `id` | `ResolutionRequest.service_ids` / bound `Porto.service_ids` | `ResolutionRequest.serviceIds` / bound `Porto.serviceIds` |
+| Purchased feature kinds | `services[].features[]` → `Feature.kind` | `Porto.feature_kinds` / `PortoMark.feature_kinds` / `ServiceOption.feature_kinds` | `Porto.featureKinds` / `PortoMark.featureKinds` / `ServiceOption.featureKinds` |
 | Selected service kinds | — | `Porto.services` | `Porto.services` |
 | Authoritative quote | catalog cents | `Porto.amount` / `Pricing.amount` | `Porto.amount` / `Pricing.amount` |
 | Quote breakdown | — | `Porto.components` / `Pricing.components` (`PriceComponent`) | `Porto.components` / `Pricing.components` (`PriceComponent`) |
